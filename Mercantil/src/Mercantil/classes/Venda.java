@@ -80,11 +80,12 @@ public class Venda {
 		this.quant = quant;
 	}
 
+	
+
 	@Override
 	public String toString() {
 		return "Venda [nomeCliente=" + nomeCliente + ", descricaoVenda=" + descricaoVenda + ", enderecoEntrega="
-				+ enderecoEntrega + ", valor=" + valor + ", quant=" + quant + ", item=" + item + ", produto=" + produto
-				+ ", listaVendas=" + listaVendas + "]";
+				+ enderecoEntrega + ", valor=" + valor + ", quant=" + quant + ", item=" + item + "]";
 	}
 
 	public void ListadeVendas() {
