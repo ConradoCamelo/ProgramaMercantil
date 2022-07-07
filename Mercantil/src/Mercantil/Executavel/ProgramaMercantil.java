@@ -9,7 +9,8 @@ import Mercantil.classes.Venda;
 public class ProgramaMercantil {
 
 	public static void main(String[] args) {
-
+		try {
+		
 		String login = JOptionPane.showInputDialog("Informe o Login");
 		String senha = JOptionPane.showInputDialog("Informe a Senha");
 
@@ -75,9 +76,29 @@ public class ProgramaMercantil {
 		} else {
 			JOptionPane.showMessageDialog(null, "Autenticação incorreta!");
 		}
-
+		
+		
+		}catch (Exception e) {
+			//Instanciando para aparecer no Console (Janela Usuário)
+			StringBuilder saida = new StringBuilder();
+			
+			//Imprimi Erro no Console Java 
+			e.printStackTrace();
+			
+			//Mensagem do Erro ou Caus
+			System.out.println("Mensagem " + e.getMessage());
+			
+			//Mensagens que vão aparecer no Console
+			for (int i = 0; i<e.getStackTrace().length; i++) {
+				saida.append("Classe de Erro: " + e.getStackTrace()[i].getClassName());
+				saida.append("Método de Erro: " + e.getStackTrace()[i].getMethodName());
+				saida.append("Linha de Erro: " + e.getStackTrace()[i].getLineNumber());
+			}
+			
+		}
+		
+		}// <--- fim main
 	}
-}
 
 /*
  * List <Produto> produtos = new ArrayList<Produto>();
