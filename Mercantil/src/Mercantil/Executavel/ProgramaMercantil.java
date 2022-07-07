@@ -78,7 +78,7 @@ public class ProgramaMercantil {
 		}
 		
 		
-		}catch (Exception e) {
+		}catch (NumberFormatException e) {
 			//Instanciando para aparecer no Console (Janela Usuário)
 			StringBuilder saida = new StringBuilder();
 			
@@ -95,6 +95,15 @@ public class ProgramaMercantil {
 				saida.append("Linha de Erro: " + e.getStackTrace()[i].getLineNumber());
 			}
 			
+			JOptionPane.showMessageDialog(null, "Erro de Conversão de número: " + saida.toString());
+			
+		}catch (NullPointerException e) {
+			JOptionPane.showMessageDialog(null, "Opa um null Pointer Exception: " + e.getClass());
+			
+			//Apresenta Qualquer Tipo de Erro (Extrema Importância)
+		}catch (Exception e) {
+				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Erro Inesperado" + e.getClass().getName());
 		}
 		
 		}// <--- fim main
