@@ -104,8 +104,10 @@ public class ProgramaMercantil {
 		}catch (Exception e) {
 				e.printStackTrace();
 				JOptionPane.showMessageDialog(null, "Erro Inesperado" + e.getClass().getName());
+		}//Finally Sempre é Executado ocorrendo erros ou não
+		finally {
+			JOptionPane.showMessageDialog(null, "Obrigado você estar utilizando o Programa Mercantil");
 		}
-		
 		}// <--- fim main
 	}
 
