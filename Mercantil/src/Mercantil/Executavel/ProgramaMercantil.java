@@ -1,5 +1,8 @@
 package Mercantil.Executavel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
 import Mercantil.classes.Gerente;
@@ -10,106 +13,102 @@ public class ProgramaMercantil {
 
 	public static void main(String[] args) {
 		try {
-		
-		String login = JOptionPane.showInputDialog("Informe o Login");
-		String senha = JOptionPane.showInputDialog("Informe a Senha");
 
-		Gerente gerente = new Gerente();
-		gerente.setLogin(login);
-		gerente.setSenha(senha);
+			String login = JOptionPane.showInputDialog("Informe o Login");
+			String senha = JOptionPane.showInputDialog("Informe a Senha");
 
-		if (gerente.autenticar()) {
+			Gerente gerente = new Gerente();
+			gerente.setLogin(login);
+			gerente.setSenha(senha);
 
-			JOptionPane.showMessageDialog(null, "Seja Bem-Vindo ao Programa Mercantil");
+			if (gerente.autenticar()) {
 
-			Venda venda = new Venda();
+				JOptionPane.showMessageDialog(null, "Seja Bem-Vindo ao Programa Mercantil");
 
-			int escolha = JOptionPane.showConfirmDialog(null, "Deseja adicionar algum produto?");
-			if (escolha == 0) {
-				do {
-					// Instanciando um Objeto para Lista de Produtos
-					Produto produto = new Produto();
+				List<Venda> vendas = new ArrayList<Venda>();
 
-					String id = JOptionPane.showInputDialog("Adicione um Id do Produto");
-					String nome = JOptionPane.showInputDialog("Adicione o nome do Produto");
-					String valor = JOptionPane.showInputDialog("Qual o valor do Produto");
+				int escolha = JOptionPane.showConfirmDialog(null, "Deseja adicionar algum produto?");
+				if (escolha == 0) {
+					do {
 
-					produto.setId(id);
-					produto.setNome(nome);
-					produto.setValor(Double.valueOf(valor));
+						Venda venda = new Venda();
 
-					venda.getProduto().getListaProdutos().add(produto);
+						String nomeCliente = JOptionPane.showInputDialog("Qual o nome do Cliente ");
+						String enderecoEntrega = JOptionPane.showInputDialog("Endereco de Entrega");
 
-					escolha = JOptionPane.showConfirmDialog(null, "Deseja adicionar mais um produto");
-				} while (escolha == 0);
+						venda.setNomeCliente(nomeCliente);
+						venda.setEnderecoEntrega(enderecoEntrega);
 
+						escolha = JOptionPane.showConfirmDialog(null, "Deseja adicionar algum produto?");
+						if (escolha == 0) {
+							do {
+
+								// Instanciando um Objeto para Lista de Produtos
+								Produto produto = new Produto();
+
+								String id = JOptionPane.showInputDialog("Id do Produto");
+								String nome = JOptionPane.showInputDialog("Nome do Produto");
+								String valor = JOptionPane.showInputDialog("Valor do Produto");
+
+								produto.setId(id);
+								produto.setNome(nome);
+								produto.setValor(Double.valueOf(valor));
+
+								venda.getProdutos().add(produto);
+
+								escolha = JOptionPane.showConfirmDialog(null, "Deseja adicionar mais um produto?");
+
+							} while (escolha == 0);
+						}
+						vendas.add(venda);
+						escolha = JOptionPane.showConfirmDialog(null, "Deseja adicionar mais uma Venda?");
+					} while (escolha == 0);
+				}
+
+				// Modulo de Impressão
+				System.out.println("Dados da Venda ");
+				for (Venda venda : vendas) {
+
+					System.out.println(venda.toString());
+					System.out.println("---------------------------------------");
+				}
+
+			} else {
+				JOptionPane.showMessageDialog(null, "Autenticação incorreta!");
 			}
 
-			do {
-				// Instanciando um Objeto para Lista de Produtos
-				Venda venda1 = new Venda();
-
-				String nomeCliente = JOptionPane.showInputDialog("Qual o nome do Cliente ");
-				String descricaoVenda = JOptionPane.showInputDialog("Descriação da Venda");
-				String enderecoEntrega = JOptionPane.showInputDialog("Endereco de Entrega");
-				JOptionPane.showMessageDialog(null, venda.getProduto().getListaProdutos());
-				String produtoVenda = JOptionPane.showInputDialog("Digite o Produto");
-				String quant = JOptionPane.showInputDialog("Quantidade");
-
-				venda1.setNomeCliente(nomeCliente);
-				venda1.setDescricaoVenda(descricaoVenda);
-				venda1.setEnderecoEntrega(enderecoEntrega);
-				venda1.setQuant(Integer.valueOf(quant));
-				venda1.setItem(produtoVenda);
-				venda.getListaVendas().add(venda1);
-
-				escolha = JOptionPane.showConfirmDialog(null, "Deseja adicionar mais uma venda");
-			} while (escolha == 0);
-
-			// Modulo de Impressão
-			System.out.println("Lista com todos os Produtos incluidos");
-			venda.getProduto().listaProduto();
-			System.out.println("Dados da Venda ");
-			venda.ListadeVendas();
-			venda.getProduto().totalVenda();
-
-		} else {
-			JOptionPane.showMessageDialog(null, "Autenticação incorreta!");
-		}
-		
-		
-		}catch (NumberFormatException e) {
-			//Instanciando para aparecer no Console (Janela Usuário)
+		} catch (NumberFormatException e) {
+			// Instanciando para aparecer no Console (Janela Usuário)
 			StringBuilder saida = new StringBuilder();
-			
-			//Imprimi Erro no Console Java 
+
+			// Imprimi Erro no Console Java
 			e.printStackTrace();
-			
-			//Mensagem do Erro ou Caus
+
+			// Mensagem do Erro ou Caus
 			System.out.println("Mensagem " + e.getMessage());
-			
-			//Mensagens que vão aparecer no Console
-			for (int i = 0; i<e.getStackTrace().length; i++) {
+
+			// Mensagens que vão aparecer no Console
+			for (int i = 0; i < e.getStackTrace().length; i++) {
 				saida.append("Classe de Erro: " + e.getStackTrace()[i].getClassName());
 				saida.append("Método de Erro: " + e.getStackTrace()[i].getMethodName());
 				saida.append("Linha de Erro: " + e.getStackTrace()[i].getLineNumber());
 			}
-			
+
 			JOptionPane.showMessageDialog(null, "Erro de Conversão de número: " + saida.toString());
-			
-		}catch (NullPointerException e) {
+
+		} catch (NullPointerException e) {
 			JOptionPane.showMessageDialog(null, "Opa um null Pointer Exception: " + e.getClass());
-			
-			//Apresenta Qualquer Tipo de Erro (Extrema Importância)
-		}catch (Exception e) {
-				e.printStackTrace();
-				JOptionPane.showMessageDialog(null, "Erro Inesperado" + e.getClass().getName());
-		}//Finally Sempre é Executado ocorrendo erros ou não
+
+			// Apresenta Qualquer Tipo de Erro (Extrema Importância)
+		} catch (Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Erro Inesperado" + e.getClass().getName());
+		} // Finally Sempre é Executado ocorrendo erros ou não
 		finally {
-			JOptionPane.showMessageDialog(null, "Obrigado você estar utilizando o Programa Mercantil");
+			JOptionPane.showMessageDialog(null, "Venda Finalizada");
 		}
-		}// <--- fim main
-	}
+	}// <--- fim main
+}
 
 /*
  * List <Produto> produtos = new ArrayList<Produto>();

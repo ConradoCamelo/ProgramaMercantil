@@ -6,23 +6,14 @@ import java.util.List;
 public class Venda {
 
 	private String nomeCliente;
-	private String descricaoVenda;
 	private String enderecoEntrega;
 	private double valor;
 	private int quant;
 	private String item;
 	double total;
-
-	public String getItem() {
-		return item;
-	}
-
-	public void setItem(String item) {
-		this.item = item;
-	}
-
+	
 	private Produto produto = new Produto();
-	private List<Venda> listaVendas = new ArrayList<Venda>();
+	
 
 	public Produto getProduto() {
 		return produto;
@@ -32,12 +23,30 @@ public class Venda {
 		this.produto = produto;
 	}
 
-	public List<Venda> getListaVendas() {
-		return listaVendas;
+	private List<Produto> produtos = new ArrayList<Produto>();
+
+	public double getTotal() {
+		return total;
 	}
 
-	public void setListaVendas(List<Venda> listaVendas) {
-		this.listaVendas = listaVendas;
+	public void setTotal(double total) {
+		this.total = total;
+	}
+
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
+
+	public String getItem() {
+		return item;
+	}
+
+	public void setItem(String item) {
+		this.item = item;
 	}
 
 	public String getNomeCliente() {
@@ -46,14 +55,6 @@ public class Venda {
 
 	public void setNomeCliente(String nomeCliente) {
 		this.nomeCliente = nomeCliente;
-	}
-
-	public String getDescricaoVenda() {
-		return descricaoVenda;
-	}
-
-	public void setDescricaoVenda(String descricaoVenda) {
-		this.descricaoVenda = descricaoVenda;
 	}
 
 	public String getEnderecoEntrega() {
@@ -80,23 +81,14 @@ public class Venda {
 		this.quant = quant;
 	}
 
-	
-
 	@Override
 	public String toString() {
-		return "Venda [nomeCliente=" + nomeCliente + ", descricaoVenda=" + descricaoVenda + ", enderecoEntrega="
-				+ enderecoEntrega + ", valor=" + valor + ", quant=" + quant + ", item=" + item + "]";
+		return "Venda [nomeCliente=" + nomeCliente + ", enderecoEntrega=" + enderecoEntrega + ", produtos=" + produtos
+				+ "]";
 	}
 
-	public void ListadeVendas() {
-		for (Venda venda : listaVendas) {
 
-			System.out.println(venda.toString());
 
-		}
-
-	}
-	
 	
 
 }

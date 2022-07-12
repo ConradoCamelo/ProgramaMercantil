@@ -71,7 +71,7 @@ public class Gerente extends Pessoa implements PermitirAcesso {
 	@Override
 	public boolean autenticar() {
 		
-		return login.equals("Conrado") && senha.equals("mandriva");
+		return login.equals("Conrado") && senha.equals("man");
 	}
 	
 	
